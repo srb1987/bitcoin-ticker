@@ -12,6 +12,12 @@ Clone this repository into your local machine and open in your Android Studio.
 - Compile SDK 29
 - Build tool 29.0.3
 
+* You may need to add a couple of properties to support Androidx for third part libraries in your gradle.properties:
+```
+android.useAndroidX=true
+android.enableJetifier=true
+```
+
 ### Dependencies
 Most of dependencies likely to use are already added but you can freely add dependencies to build.gradle file if you need.
 
@@ -67,5 +73,15 @@ Consider to separate business data object from ui data object when you do modell
 ### View Layer
 All your ui related code will be in `feature` package and you can simply code in `OrderTicketFragment` and `OrderTicketViewModel` class for your implementation.
 You can use extension functions in `utils` packages if you need to do price formatting, showing toast message or hide soft keyboard.
+
+### Unit test
+We strongly recommend you to write some unit tests. At least test for `OrderTicketViewModel`. For example, you may need to verfiy if your polling logic is working fine. Use clear naming for each test functions by using enclosed backtikcs. eg. 
+```kotlin
+class MyTestCase {
+     @Test fun `ensure everything works`() { /*...*/ }
+     
+     @Test fun ensureEverythingWorks_onAndroid() { /*...*/ }
+}
+```
 
 
