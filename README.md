@@ -75,7 +75,7 @@ All your ui related code will be in `feature` package and you can simply code in
 You can use extension functions in `utils` packages if you need to do price formatting, showing toast message or hide soft keyboard.
 
 ### Unit test
-We strongly recommend you to write some unit tests. At least test for `OrderTicketViewModel`. For example, you may need to verfiy if your polling logic is working fine. Use clear naming for each test functions by using enclosed backtikcs. eg. 
+We strongly recommend you to write some unit tests. At least test for `OrderTicketViewModel`. For example, you may need to verfiy if your polling logic is working fine. Use clear naming for each test functions by using enclosed backtikcs if you need. 
 ```kotlin
 class MyTestCase {
      @Test fun `ensure everything works`() { /*...*/ }
