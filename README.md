@@ -57,8 +57,9 @@ You are recommended to use `LiveData` to communicate with `OrderTicketFragment`.
 
 
 ### Data Layer
-Update `API_BASE_URL` constants in`core.di.module.NetworkModule` class to the Base URL of the one given in the instruction.
+Update `API_BASE_URL` constant in`core.di.module.NetworkModule` class to the Base URL of the one given in the instruction.
 Provide a function to fetch latest data in`data.api.BitcoinApi` class. This class is used by Retrofit and DI is already implemented in `core.di.module.NetworkModule` class.
+Kotlin Coroutines are our preferences for API call but you can use RxJava as well.
 You might use intermediate layer like Repository, Interactor or UseCase pattern to handle API call and you are recommended to use DI when you create an instance of it.
 Consider to separate business data object from ui data object when you do modelling of the API.
 
