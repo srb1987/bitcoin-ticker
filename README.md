@@ -1,3 +1,10 @@
+# Task Update
+
+- MVVM architecture
+- LiveData and Coroutines used
+- Unit tests of ViewModel class
+- Preferred future tasks - Update UI to be more funky rather than functional
+
 
 # CMC Markets Android Skeleton Project
 
