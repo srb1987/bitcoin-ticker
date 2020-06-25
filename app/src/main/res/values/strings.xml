@@ -8,7 +8,7 @@
     <string name="total_value">Total value</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
-    <string name="stock_price_text">%.2f%s</string>
+    <string name="stock_price_text">%.2f</string>
     <string name="amount">Amount</string>
     <string name="formatted_amount_header">Amount (%s)</string>
 

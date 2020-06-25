@@ -30,7 +30,7 @@
         android:textAlignment="center"
         android:textColor="@color/sell_text_color"
         android:textSize="@dimen/value_text_size"
-        tools:text="44889$" />
+        tools:text="44889.79" />
 
     <ImageButton
         android:id="@+id/buy_price_button"
@@ -56,7 +56,7 @@
         android:textAlignment="center"
         android:textColor="@color/buy_text_color"
         android:textSize="@dimen/value_text_size"
-        tools:text="17889$" />
+        tools:text="17889.67" />
 
     <TextView
         android:id="@+id/sell_label"
@@ -83,6 +83,18 @@
         android:text="@string/buy"
         android:textColor="@color/buy_header_color"
         android:elevation="5dp"/>
+
+    <TextView
+        android:id="@+id/spread_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/sell_price_button"
+        tools:text="10.05"
+        android:textColor="@color/label_spread_color" />
 
     <TextView
         android:id="@+id/units_header"

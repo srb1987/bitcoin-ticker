@@ -23,5 +23,6 @@
     <color name="buy_text_color">@android:color/holo_green_light</color>
     <color name="cancel_button_text_color">@android:color/black</color>
     <color name="confirm_button_text_color">@android:color/black</color>
+    <color name="label_spread_color">#FAF8F7</color>
 
 </resources>

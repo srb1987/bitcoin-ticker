@@ -17,11 +17,11 @@ data class BitcoinPrice(
         @SerializedName("last")
         val latestValue: Float?,
         @SerializedName("buy")
-        val buyPrice: Float?,
+        val buyPrice: Float,
         @SerializedName("sell")
-        val sellPrice: Float?,
+        val sellPrice: Float,
         @SerializedName("symbol")
-        val symbol: String?
+        val symbol: String
 ) {
         companion object {
                 fun dummy() = BitcoinPrice(10.0f, 10.0f, 10.0f, 12.0f, "$")

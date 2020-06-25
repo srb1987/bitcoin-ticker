@@ -1,6 +1,8 @@
 package au.cmcmarkets.ticker.feature.orderticket
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -110,6 +112,7 @@ class OrderTicketFragment : DaggerFragment() {
             sell_price.text = "--"
             units_input.setText("0")
             total_value.setText("0")
+            spread_text.text = "--"
             cancel_button.isEnabled = false
             confirm_button.isEnabled = false
             total_value_header.text = getString(R.string.amount)
@@ -121,10 +124,17 @@ class OrderTicketFragment : DaggerFragment() {
     }
 
     private fun updateDetails(bitcoinPrice: BitcoinPrice) {
-        buy_price.text = String.format(getString(R.string.stock_price_text), bitcoinPrice.buyPrice, bitcoinPrice.symbol)
-        sell_price.text = String.format(getString(R.string.stock_price_text), bitcoinPrice.sellPrice, bitcoinPrice.symbol)
+        buy_price.text = getFormattedString(String.format(getString(R.string.stock_price_text), bitcoinPrice.buyPrice))
+        sell_price.text = getFormattedString(String.format(getString(R.string.stock_price_text), bitcoinPrice.sellPrice))
         total_value_header.text = String.format(getString(R.string.formatted_amount_header, bitcoinPrice.symbol))
         total_value.setText("0")
+        spread_text.text = (bitcoinPrice.buyPrice - bitcoinPrice.sellPrice).toString()
+    }
+
+    private fun getFormattedString(string: String) : SpannableString {
+        val spannableString = SpannableString(string)
+        spannableString.setSpan(RelativeSizeSpan(0.75f), string.length - 2, string.length, 0)
+        return spannableString
     }
 
     private fun showError(errorMessage: String) {
