@@ -6,5 +6,22 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="black">#000000</color>
+    <color name="sell_header_color">#F16E65</color>
+    <color name="buy_header_color">#3C83EE</color>
+    <color name="label_header_color">#3C24FF</color>
+    <color name="buy_button_selected_color">#040E3F</color>
+    <color name="buy_button_unselected_color">#356175</color>
+    <color name="sell_button_selected_color">#200B09</color>
+    <color name="sell_button_unselected_color">#50221D</color>
+    <color name="market_color">#FFFFFF</color>
+    <color name="market_bg_color">#6A7BE9</color>
+    <color name="cancel_disabled_color">#5F5C5B</color>
+    <color name="cancel_enabled_color">#7FC1F7</color>
+    <color name="confirm_disabled_color">#6B6767</color>
+    <color name="confirm_enabled_color">#00BCD4</color>
+    <color name="sell_text_color">@android:color/holo_green_light</color>
+    <color name="buy_text_color">@android:color/holo_green_light</color>
+    <color name="cancel_button_text_color">@android:color/black</color>
+    <color name="confirm_button_text_color">@android:color/black</color>
 
 </resources>

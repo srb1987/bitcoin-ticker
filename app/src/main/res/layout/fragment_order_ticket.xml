@@ -3,17 +3,232 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true" >
+
+    <ImageButton
+        android:id="@+id/sell_price_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/display_height"
+        android:gravity="center"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/sell_button_background"
+        app:layout_constraintEnd_toStartOf="@id/buy_price_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/sell" />
 
     <TextView
-        android:id="@+id/titleTxt"
-        android:layout_width="match_parent"
+        android:id="@+id/sell_price"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/sell_price_button"
+        app:layout_constraintStart_toStartOf="@id/sell_price_button"
+        app:layout_constraintTop_toTopOf="@id/sell_price_button"
+        app:layout_constraintBottom_toBottomOf="@id/sell_price_button"
+        android:textAlignment="center"
+        android:textColor="@color/sell_text_color"
+        android:textSize="@dimen/value_text_size"
+        tools:text="44889$" />
+
+    <ImageButton
+        android:id="@+id/buy_price_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/display_height"
+        android:gravity="center"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/buy_button_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sell_price_button"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/buy" />
+
+    <TextView
+        android:id="@+id/buy_price"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/buy_price_button"
+        app:layout_constraintStart_toStartOf="@id/buy_price_button"
+        app:layout_constraintTop_toTopOf="@id/buy_price_button"
+        app:layout_constraintBottom_toBottomOf="@id/buy_price_button"
+        android:textAlignment="center"
+        android:textColor="@color/buy_text_color"
+        android:textSize="@dimen/value_text_size"
+        tools:text="17889$" />
+
+    <TextView
+        android:id="@+id/sell_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/header_text_size"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/sell"
+        android:textColor="@color/sell_header_color"
+        android:elevation="5dp" />
+
+    <TextView
+        android:id="@+id/buy_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/buy"
+        android:textColor="@color/buy_header_color"
+        android:elevation="5dp"/>
+
+    <TextView
+        android:id="@+id/units_header"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintEnd_toStartOf="@id/total_value_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sell_price_button"
+        android:text="@string/units"
+        android:textColor="@color/label_header_color" />
+
+    <TextView
+        android:id="@+id/total_value_header"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintStart_toEndOf="@id/units_header"
+        app:layout_constraintEnd_toStartOf="@id/market_header"
+        app:layout_constraintTop_toTopOf="@id/units_header"
+        tools:text="Amount ($)"
+        android:textColor="@color/label_header_color" />
+
+    <TextView
+        android:id="@+id/market_header"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintStart_toEndOf="@id/total_value_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/total_value_header"
+        android:text="@string/market"
+        android:background="@drawable/market_header_background"
+        android:textColor="@color/market_color"/>
+    
+    <EditText
+        android:id="@+id/units_input"
+        android:hint="@string/unit_hint_text"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/input_text_height"
+        android:textAlignment="center"
+        android:textSize="@dimen/input_text_size"
+        android:padding="@dimen/standard_padding"
+        app:layout_constraintTop_toBottomOf="@id/units_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/units_header"
+        android:autofillHints="Units"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/total_value"
+        android:hint="@string/total_value"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/input_text_height"
+        android:textAlignment="center"
+        android:textSize="@dimen/input_text_size"
+        android:padding="@dimen/standard_padding"
+        app:layout_constraintEnd_toEndOf="@id/total_value_header"
+        app:layout_constraintStart_toEndOf="@id/units_input"
+        app:layout_constraintTop_toBottomOf="@id/total_value_header"
+        android:inputType="none"
+        android:enabled="false"
+        tools:text="40$"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/trade_type"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_text_size"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_value"
+        app:layout_constraintTop_toBottomOf="@id/market_header"
+        app:layout_constraintBottom_toBottomOf="@id/total_value"
+        tools:text="Buy"
+        android:textColor="@color/label_header_color" />
+
+    <ImageButton
+        android:id="@+id/cancel_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/standard_margin"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/cancel_button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/confirm_button"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/cancel"/>
+
+    <TextView
+        android:id="@+id/cancel_button_text"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/cancel_button"
+        app:layout_constraintStart_toStartOf="@id/cancel_button"
+        app:layout_constraintTop_toTopOf="@id/cancel_button"
+        app:layout_constraintBottom_toBottomOf="@id/cancel_button"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/cancel_button_text_color"
+        android:text="@string/cancel" />
+
+    <ImageButton
+        android:id="@+id/confirm_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/standard_margin"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/confirm_button_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancel_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/button_text_size"
+        android:textAllCaps="false"
+        android:contentDescription="@string/confirm" />
+
+    <TextView
+        android:id="@+id/confirm_button_text"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/confirm_button"
+        app:layout_constraintStart_toStartOf="@id/confirm_button"
+        app:layout_constraintTop_toTopOf="@id/confirm_button"
+        app:layout_constraintBottom_toBottomOf="@id/confirm_button"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/confirm_button_text_color"
+        android:text="@string/confirm" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
