@@ -46,7 +46,12 @@ class OrderTicketFragment : DaggerFragment() {
     private fun addViewListeners() {
         units_input.doAfterTextChanged {
             it?.let {
-                viewModel.onTextChanged(it.toString())
+                viewModel.onUnitsChanged(it.toString())
+            }
+        }
+        total_value.doAfterTextChanged {
+            it?.let {
+                viewModel.onAmountChanged(it.toString())
             }
         }
         sell_price_button.setOnClickListener {
@@ -73,6 +78,12 @@ class OrderTicketFragment : DaggerFragment() {
         viewModel.errorMessage.observe(this, Observer {
             it?.let {
                 showError(it)
+            }
+        })
+
+        viewModel.units.observe(this, Observer {
+            it?.let {
+                units_input.setText(it)
             }
         })
 
@@ -111,7 +122,6 @@ class OrderTicketFragment : DaggerFragment() {
             buy_price.text = "--"
             sell_price.text = "--"
             units_input.setText("0")
-            total_value.setText("0")
             spread_text.text = "--"
             cancel_button.isEnabled = false
             confirm_button.isEnabled = false
@@ -127,7 +137,6 @@ class OrderTicketFragment : DaggerFragment() {
         buy_price.text = getFormattedString(String.format(getString(R.string.stock_price_text), bitcoinPrice.buyPrice))
         sell_price.text = getFormattedString(String.format(getString(R.string.stock_price_text), bitcoinPrice.sellPrice))
         total_value_header.text = String.format(getString(R.string.formatted_amount_header, bitcoinPrice.symbol))
-        total_value.setText("0")
         spread_text.text = (bitcoinPrice.buyPrice - bitcoinPrice.sellPrice).toString()
     }
 

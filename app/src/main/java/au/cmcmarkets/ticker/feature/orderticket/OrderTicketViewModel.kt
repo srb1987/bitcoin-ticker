@@ -16,12 +16,14 @@ interface OrderTicketViewModelInterface {
     val bitcoinPrice: LiveData<BitcoinPrice>
     val errorMessage: LiveData<String>
     val showLoading: LiveData<Boolean>
+    val units: LiveData<String>
     val totalValue: LiveData<String>
     val tradeActionEnabled: LiveData<Boolean>
     val tradeSelected: LiveData<TradeType>
     fun onResume()
     fun onPause()
-    fun onTextChanged(units: String)
+    fun onUnitsChanged(units: String)
+    fun onAmountChanged(amount: String)
     fun onBuyPressed()
     fun onSellPressed()
 }
@@ -42,6 +44,9 @@ class OrderTicketViewModel @Inject constructor(private val providedCoroutineScop
     private var _showLoading = MutableLiveData<Boolean>()
     override val showLoading: LiveData<Boolean> = _showLoading
 
+    private var _units = MutableLiveData<String>()
+    override val units: LiveData<String> = _units
+
     private var _totalValue = MutableLiveData<String>()
     override val totalValue: LiveData<String> = _totalValue
 
@@ -54,23 +59,45 @@ class OrderTicketViewModel @Inject constructor(private val providedCoroutineScop
     private val period : Long = 15000
 
     private var tradeType: TradeType = TradeType.Buy
-    private var currentUnits: String = "0"
+    private var currentUnits: String = "0.00"
+    private var totalAmount: String = "0.00"
 
     private val coroutineScope = getViewModelScope(providedCoroutineScope)
 
     private var currentBitcoinPrice: BitcoinPrice? = null
 
-    private fun updateTotalValue(units: String = currentUnits) {
+    private fun updateUnits(amount: String) {
+        if (totalAmount == amount) return
+        totalAmount = amount
+        val price = when (tradeType) {
+            TradeType.Sell -> currentBitcoinPrice?.sellPrice
+            TradeType.Buy -> currentBitcoinPrice?.buyPrice
+        }
+        price?.let {
+            var unitsFromAmount = 0.00f
+            try {
+                unitsFromAmount = amount.toFloat() / price
+                currentUnits = String.format("%.2f", unitsFromAmount)
+                _units.postValue(currentUnits)
+                _tradeActionEnabled.postValue(unitsFromAmount > 0)
+            } catch (e : NumberFormatException) {
+                _tradeActionEnabled.postValue(false)
+            }
+        }
+    }
+
+    private fun updateTotalValue(units: String) {
+        if (currentUnits == units) return
         currentUnits = units
         val price = when (tradeType) {
             TradeType.Sell -> currentBitcoinPrice?.sellPrice
             TradeType.Buy -> currentBitcoinPrice?.buyPrice
         }
         price?.let {
-            var totalValue = 0.0f
+            var totalValue = 0.00f
             try {
                 totalValue = units.toFloat() * it
-                _totalValue.postValue(totalValue.toString())
+                _totalValue.postValue(String.format("%.2f", totalValue))
                 _tradeActionEnabled.postValue(totalValue > 0)
             } catch (e : NumberFormatException) {
                 _tradeActionEnabled.postValue(false)
@@ -89,6 +116,7 @@ class OrderTicketViewModel @Inject constructor(private val providedCoroutineScop
                             _showLoading.postValue(false)
                             currentBitcoinPrice = response.data.bitcoinPrice
                             _bitcoinPrice.postValue(currentBitcoinPrice)
+                            _units.postValue(currentUnits)
                         }
                         is ResultData.Error -> {
                             _showLoading.postValue(false)
@@ -107,22 +135,26 @@ class OrderTicketViewModel @Inject constructor(private val providedCoroutineScop
         bitcoinServer.stopPoll()
     }
 
-    override fun onTextChanged(units: String) {
+    override fun onUnitsChanged(units: String) {
         currentBitcoinPrice?.let {
             updateTotalValue(units)
+        }
+    }
+
+    override fun onAmountChanged(amount: String) {
+        currentBitcoinPrice?.let {
+            updateUnits(amount)
         }
     }
 
     override fun onBuyPressed() {
         tradeType = TradeType.Buy
         _tradeSelected.postValue(tradeType)
-        updateTotalValue()
     }
 
     override fun onSellPressed() {
         tradeType = TradeType.Sell
         _tradeSelected.postValue(tradeType)
-        updateTotalValue()
     }
 
 }

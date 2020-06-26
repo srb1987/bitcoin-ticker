@@ -77,15 +77,28 @@ class OrderTicketViewModelTest {
     }
 
     @Test
-    fun onTextChanged() {
+    fun onUnitsChanged() {
         // given
         viewModel.onResume()
 
         // when
-        viewModel.onTextChanged("10")
+        viewModel.onUnitsChanged("10")
 
         // then
-        assertEquals(100.0f.toString(), viewModel.totalValue.value)
+        assertEquals(100.00f, viewModel.totalValue.value!!.toFloat())
+        assertTrue(viewModel.tradeActionEnabled.value!!)
+    }
+
+    @Test
+    fun onAmountChanged() {
+        // given
+        viewModel.onResume()
+
+        // when
+        viewModel.onAmountChanged("1000")
+
+        // then
+        assertEquals(100.00f, viewModel.units.value!!.toFloat())
         assertTrue(viewModel.tradeActionEnabled.value!!)
     }
 

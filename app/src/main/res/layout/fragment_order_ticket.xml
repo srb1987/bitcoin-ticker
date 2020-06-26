@@ -144,8 +144,8 @@
         app:layout_constraintTop_toBottomOf="@id/units_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/units_header"
-        android:autofillHints="Units"
-        android:inputType="number" />
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/total_value"
@@ -158,9 +158,8 @@
         app:layout_constraintEnd_toEndOf="@id/total_value_header"
         app:layout_constraintStart_toEndOf="@id/units_input"
         app:layout_constraintTop_toBottomOf="@id/total_value_header"
-        android:inputType="none"
-        android:enabled="false"
-        tools:text="40$"
+        android:inputType="numberDecimal"
+        tools:text="40"
         android:importantForAutofill="no" />
 
     <TextView
